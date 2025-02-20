@@ -17,10 +17,9 @@ class UserModel(BaseModel):
     email = Column(String(255))
     dt_created = Column(DateTime, default=datetime.utcnow)
     dt_updated: Optional[datetime] = Column(
-        DateTime,
-        default=datetime.utcnow,
-        onupdate=datetime.utcnow
+        DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
     )
 
     def __repr__(self):
+        """Return a string representation of the object."""
         return f"<UserModel(id={self.id}, name={self.name}, email={self.email})>"

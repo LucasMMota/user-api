@@ -1,9 +1,10 @@
+"""User routes module."""
 from flask import Blueprint, request, jsonify
 
 from app.core.services.user_service import UserService
 from app.logger import logger
 
-user_routes = Blueprint('user_routes', __name__)
+user_routes = Blueprint("user_routes", __name__)
 
 
 @user_routes.route("/users", methods=["GET"])
@@ -14,6 +15,7 @@ def list_all_users():
 
 @user_routes.route("/users/<int:user_id>", methods=["GET"])
 def get_user(user_id: int):
+    """Returns a user by its ID."""
     user = UserService().get_user(user_id)
     if not user:
         logger.info(f"m=get_user, User {user_id} not found")
@@ -25,6 +27,7 @@ def get_user(user_id: int):
 
 @user_routes.route("/users", methods=["POST"])
 def create_user():
+    """Creates a new user."""
     data = request.get_json()
     name = data.get("name")
     email = data.get("email")
@@ -32,18 +35,24 @@ def create_user():
     try:
         user = UserService().create_user(name, email)
         if not user:
-            logger.error(f"m=create_user, Error creating new user. Verify input, name={name}, email={email}")
+            logger.error(
+                f"m=create_user, Error creating new user. Verify input, name={name}, email={email}"
+            )
             return jsonify({"error": "Error creating new user. Verify input."}), 409
 
         logger.info(f"m=create_user, User created: {user.get('id')}")
         return jsonify(user), 201
     except Exception as e:
         logger.error(f"m=create_user, Internal Server Error, error={str(e)}")
-        return jsonify({"error": "Internal Server Error"}), 500  # todo check interceptors
+        return (
+            jsonify({"error": "Internal Server Error"}),
+            500,
+        )  # todo check interceptors
 
 
 @user_routes.route("/users/<int:user_id>", methods=["PUT"])
 def update_user(user_id: int):
+    """Updates a user by its ID."""
     data = request.get_json()
     name = data.get("name")
     email = data.get("email")
@@ -62,11 +71,15 @@ def update_user(user_id: int):
         return jsonify(updated_user), 200
     except Exception as e:
         logger.error(f"m=update_user, Internal Server Error, error={str(e)}")
-        return jsonify({"error": "Internal Server Error"}), 500  # todo check interceptors
+        return (
+            jsonify({"error": "Internal Server Error"}),
+            500,
+        )  # todo check interceptors
 
 
 @user_routes.route("/users/<int:user_id>", methods=["DELETE"])
 def delete_user(user_id: int):
+    """Deletes a user by its ID."""
     if not UserService().delete_user(user_id):
         logger.error(f"m=delete_user, Error deleting user {user_id}")
         return jsonify({"error": "Error deleting user"}), 404

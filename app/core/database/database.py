@@ -13,18 +13,12 @@ from app.settings import settings
 class Database:
     """Handles database connection."""
 
-    DATABASE_URL = (
-        "sqlite:///{db_path}"
-    )
+    DATABASE_URL = "sqlite:///{db_path}"
 
     @staticmethod
     def engine() -> Engine:
         """Creates a database engine."""
-        return create_engine(
-            Database.DATABASE_URL.format(
-                db_path=settings.DB_PATH
-            )
-        )
+        return create_engine(Database.DATABASE_URL.format(db_path=settings.DB_PATH))
 
     @classmethod
     def recreate_db(cls):

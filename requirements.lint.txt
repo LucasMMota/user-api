@@ -1,0 +1,5 @@
+black==23.3.0
+flake8==6.0.0
+flake8-docstrings==1.7.0
+mypy==1.4.0
+sqlalchemy-stubs==0.4

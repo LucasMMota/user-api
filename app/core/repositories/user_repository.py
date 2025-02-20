@@ -9,27 +9,21 @@ from app.logger import logger
 
 class UserRepository(BaseRepository):
     """Interface to handle interactions with database via SQLAlchemy model objects."""
+
     def __init__(self):
         super().__init__(schema=UserSchema)
 
     def fetch_all_users(self) -> List[UserSchema]:
-        """Fetches all users from database (without limit or pagination)"""
+        """Fetches all users from database (without limit or pagination)."""
         with self.db_session as db_session:
-            user_models = (
-                db_session.query(UserModel)
-                .all()
-            )
+            user_models = db_session.query(UserModel).all()
             return [UserSchema.from_orm(user) for user in user_models]
 
     def get_user_by_id(self, user_id: int) -> UserSchema | None:
         """Fetches a user by id."""
         with self.db_session as db_session:
             user_models = (
-                db_session.query(UserModel)
-                .filter(
-                    UserModel.id == user_id
-                )
-                .first()
+                db_session.query(UserModel).filter(UserModel.id == user_id).first()
             )
             return self.from_orm(user_models)
 
@@ -37,11 +31,7 @@ class UserRepository(BaseRepository):
         """Fetches a user by email."""
         with self.db_session as db_session:
             user_models = (
-                db_session.query(UserModel)
-                .filter(
-                    UserModel.email == email
-                )
-                .first()
+                db_session.query(UserModel).filter(UserModel.email == email).first()
             )
             return self.from_orm(user_models)
 

@@ -1,5 +1,5 @@
 """Base repository class for all repository classes."""
-from typing import Union, Generator
+from typing import Generator
 
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
@@ -19,9 +19,7 @@ class BaseRepository:
         """Creates a new db session."""
         return Database.create_new_session()
 
-    def from_orm(
-            self, user_model: UserModel
-    ) -> None | BaseModel:
+    def from_orm(self, user_model: UserModel) -> None | BaseModel:
         """Converts an SQLAlchemy UserModel got from databse into a Pydantic BaseModel object."""
         if not user_model:
             return None

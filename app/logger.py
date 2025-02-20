@@ -7,6 +7,7 @@ from app.settings import settings
 
 class LogConfig(BaseModel):
     """Logging configuration for the application."""
+
     LOG_LEVEL: str = settings.LOG_LEVEL
     LOGGER_NAME: str = settings.PROJECT_NAME
     LOG_FORMAT: str = "%(levelname)s | %(asctime)s | %(message)s"

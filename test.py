@@ -11,8 +11,7 @@ class TestApp(unittest.TestCase):
     def test_create_and_get_user(self):
         # Create user
         response = self.client.post(
-            "/users",
-            json={"name": "Jane Doe", "email": "jane@example.com"}
+            "/users", json={"name": "Jane Doe", "email": "jane@example.com"}
         )
         self.assertEqual(response.status_code, 201)
         data = json.loads(response.data)

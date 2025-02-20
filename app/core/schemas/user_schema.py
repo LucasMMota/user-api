@@ -15,15 +15,16 @@ class UserSchema(BaseModel):
 
     class Config:
         """
-            Pydantic's config.
+        Pydantic's config.
 
-            This allows to bind an instance of ORM objects—like SQLAlchemy to instances of a Pydantic model.
-            UserSchema.from_orm(user_model) will convert a SQLAlchemy UserModel object to a Pydantic (BaseModel) object.
+        This allows to bind an instance of ORM objects—like SQLAlchemy to instances of a Pydantic model.
+        UserSchema.from_orm(user_model) will convert a SQLAlchemy UserModel object to a Pydantic (BaseModel) object.
         """
 
         orm_mode = True
 
     def to_dict(self):
+        """Converts the Pydantic model to a dictionary."""
         return {
             "id": self.id,
             "name": self.name,
