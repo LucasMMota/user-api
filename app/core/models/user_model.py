@@ -1,3 +1,4 @@
+"""Model for table users."""
 from datetime import datetime
 from typing import Optional
 
@@ -7,7 +8,7 @@ from app.core.models.base_model import BaseModel
 
 
 class UserModel(BaseModel):
-    """Model for table vendors_responses."""
+    """Model for table users."""
 
     __tablename__ = "users"
 
@@ -19,7 +20,7 @@ class UserModel(BaseModel):
         DateTime,
         default=datetime.utcnow,
         onupdate=datetime.utcnow
-    )  # TODO checar se ta correto on update
+    )
 
     def __repr__(self):
         return f"<UserModel(id={self.id}, name={self.name}, email={self.email})>"

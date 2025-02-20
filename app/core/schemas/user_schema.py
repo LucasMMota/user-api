@@ -1,10 +1,11 @@
+"""User schema."""
 from datetime import datetime
 
 from pydantic import BaseModel
 
 
 class UserSchema(BaseModel):
-    """Schema for table vendors_responses."""
+    """Schema for table users."""
 
     id: int
     name: str
@@ -13,7 +14,12 @@ class UserSchema(BaseModel):
     dt_updated: datetime
 
     class Config:
-        """Pydantic's config."""
+        """
+            Pydantic's config.
+
+            This allows to bind an instance of ORM objects—like SQLAlchemy to instances of a Pydantic model.
+            UserSchema.from_orm(user_model) will convert a SQLAlchemy UserModel object to a Pydantic (BaseModel) object.
+        """
 
         orm_mode = True
 

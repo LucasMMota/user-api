@@ -1,3 +1,4 @@
+"""Base repository class for all repository classes."""
 from typing import Union, Generator
 
 from pydantic import BaseModel
@@ -20,8 +21,8 @@ class BaseRepository:
 
     def from_orm(
             self, user_model: UserModel
-    ) -> Union[None, BaseModel]:
-        """Converts a UserModel to a UserSchema object."""
+    ) -> None | BaseModel:
+        """Converts an SQLAlchemy UserModel got from databse into a Pydantic BaseModel object."""
         if not user_model:
             return None
 

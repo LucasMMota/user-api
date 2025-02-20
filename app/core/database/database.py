@@ -1,3 +1,4 @@
+"""Database connection and session handling."""
 from contextlib import contextmanager
 from typing import Generator
 
@@ -6,7 +7,7 @@ from sqlalchemy.engine import Engine
 from sqlalchemy.orm import sessionmaker, Session
 
 from app.core.models.base_model import BaseModel
-from app.core.settings import settings
+from app.settings import settings
 
 
 class Database:
@@ -29,8 +30,8 @@ class Database:
     def recreate_db(cls):
         """Drops all tables and then recreates them."""
         engine = cls.engine()
-        BaseModel.metadata.drop_all(bind=engine)  # Destroys all tables
-        BaseModel.metadata.create_all(bind=engine)  # Recreates them from models
+        BaseModel.metadata.drop_all(bind=engine)
+        BaseModel.metadata.create_all(bind=engine)
 
     @classmethod
     def initialize_db(cls):

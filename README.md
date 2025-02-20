@@ -87,68 +87,9 @@ You can typically run the project by executing the command above. But if find is
 
 --------------------------------------------------------------------------------
 
-## 4. Main Components
-
-   4.1 Models (models/)
-
-       - Contains Python classes that represent the data structures used by the application. 
-       - base_model.py: Defines the common base class (SQLAlchemy declarative base).
-       - user_model.py: Defines User model representing a "User" in the database.
-
-   4.2 Repositories (repositories/)
-
-       - Encapsulates data access logic in database for models.
-       - base_repository.py: A generic repository foundation for repositories extend. Handles session and 
-         db response validation with pydantic.
-       - user_repository.py: The logic for interacting with the "User" entity from database.
-
-   4.3 Schemas (schemas/)
-
-       - Used to enforce enetities schema and serialize/deserialize data. Helps converting database 
-         objects into response models without manually serializing each field. 
-       - user_schema.py: Defines "User" schema.
-
-   4.4 Services (services/)
-
-       - Houses business logic or application-level workflows.
-       - user_service.py: Orchestrates "User" operations, calling repositories 
-         and applying business rules.
-
-   4.5 Routes (app/api/v1/routes/)
-
-       - Defines the HTTP endpoints (FastAPI routes).
-       - user.py: Handles user-related endpoints (GET/POST/PUT/DELETE).
-
-   4.6 Database (core/database/)
-
-       - Manages database engine creation and initialization.
-       - database.py: Builds a SQLAlchemy engine, handles session management, 
-         and db initialization on start up. Works with Sqlit and Postgress.
-
-   4.7 Logger (logger.py)
-
-       - Utility set up for standardized logging throughout the application.
-
---------------------------------------------------------------------------------
-
-## 5. Database Files
-
-   - user_api_db.db, users.db:
-     These are SQLite database files likely used for local development.
-
---------------------------------------------------------------------------------
-
-## 6. Testing
+## 4. Testing
 
    - The application automated tests.
    - Run command:
        
     pytest
-
---------------------------------------------------------------------------------
-
-## 7. Makefile
-
-   - Makefile holds automatted commands that may be run via `make alias`. Example:
-
-    make enviroment # for creating an environment in this project using pyenv and virtualenv 
