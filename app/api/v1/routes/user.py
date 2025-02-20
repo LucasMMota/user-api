@@ -32,22 +32,15 @@ def create_user():
     name = data.get("name")
     email = data.get("email")
 
-    try:
-        user = UserService().create_user(name, email)
-        if not user:
-            logger.error(
-                f"m=create_user, Error creating new user. Verify input, name={name}, email={email}"
-            )
-            return jsonify({"error": "Error creating new user. Verify input."}), 409
+    user = UserService().create_user(name, email)
+    if not user:
+        logger.error(
+            f"m=create_user, Error creating new user. Verify input, name={name}, email={email}"
+        )
+        return jsonify({"error": "Error creating new user. Verify input."}), 409
 
-        logger.info(f"m=create_user, User created: {user.get('id')}")
-        return jsonify(user), 201
-    except Exception as e:
-        logger.error(f"m=create_user, Internal Server Error, error={str(e)}")
-        return (
-            jsonify({"error": "Internal Server Error"}),
-            500,
-        )  # todo check interceptors
+    logger.info(f"m=create_user, User created: {user.get('id')}")
+    return jsonify(user), 201
 
 
 @user_routes.route("/users/<int:user_id>", methods=["PUT"])
@@ -62,20 +55,13 @@ def update_user(user_id: int):
         logger.error(f"m=update_user, Ivalid input, name={name}, email={email}")
         return jsonify({"error": "Name and email are required"}), 400
 
-    try:
-        updated_user = UserService().update_user(user_id, name, email)
-        if not updated_user:
-            logger.error(f"m=update_user, Error updating user {user_id}, verify input, name={name}, email={email}")
-            return jsonify({"error": "User not found"}), 404
+    updated_user = UserService().update_user(user_id, name, email)
+    if not updated_user:
+        logger.error(f"m=update_user, Error updating user {user_id}, verify input, name={name}, email={email}")
+        return jsonify({"error": "User not found"}), 404
 
-        logger.info(f"m=update_user, User updated: {updated_user.get('id')}")
-        return jsonify(updated_user), 200
-    except Exception as e:
-        logger.error(f"m=update_user, Internal Server Error, error={str(e)}")
-        return (
-            jsonify({"error": "Internal Server Error"}),
-            500,
-        )  # todo check interceptors
+    logger.info(f"m=update_user, User updated: {updated_user.get('id')}")
+    return jsonify(updated_user), 200
 
 
 @user_routes.route("/users/<int:user_id>", methods=["DELETE"])
