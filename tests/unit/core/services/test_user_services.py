@@ -1,7 +1,8 @@
-import pytest
 from unittest.mock import Mock
+
+import pytest
+
 from app.core.services.user_service import UserService
-from app.core.models.user_model import UserModel
 
 
 # A fake user model to simulate a UserModel with a to_dict() method.

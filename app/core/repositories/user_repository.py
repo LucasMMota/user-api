@@ -44,11 +44,11 @@ class UserRepository(BaseRepository):
 
             return self.from_orm(user)
 
-    def update_user(self, user) -> UserSchema | None:
+    def update_user(self, user: UserModel) -> UserSchema | None:
         """Updates a user and return the updated user object."""
         with self.db_session as db_session:
             _user = db_session.query(UserModel).filter(UserModel.id == user.id).first()
-            if not user:
+            if not _user:
                 logger.error(f"m=update_user, User {user.id} not found")
                 return None
 
@@ -60,7 +60,7 @@ class UserRepository(BaseRepository):
 
             return self.from_orm(_user)
 
-    def delete_user(self, user_id) -> bool:
+    def delete_user(self, user_id: UserModel) -> bool:
         """Deletes an user if exists and return True if the user was deleted."""
         with self.db_session as db_session:
             user = db_session.query(UserModel).filter(UserModel.id == user_id).first()

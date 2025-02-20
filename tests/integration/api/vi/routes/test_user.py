@@ -1,8 +1,8 @@
-from unittest import mock
+import json
 
 import pytest
-import json
 from flask import Flask
+
 from app.api.v1.routes.user import user_routes
 from app.core.database.database import Database
 from app.settings import settings

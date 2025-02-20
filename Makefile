@@ -29,12 +29,12 @@ requirements-lint:
 
 .PHONY: requirements-app
 ## install prod requirements
-requirements-minimum:
+requirements-app:
 	@PYTHONPATH=. python -m pip install -U -r requirements.txt
 
 .PHONY: requirements-all
 ## install all requirements
-requirements-all: requirements-test requirements-lint requirements-dev requirements-app
+requirements-all: requirements-test requirements-lint requirements-app
 
 # Test ========================================================================
 
