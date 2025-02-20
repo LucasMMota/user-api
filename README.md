@@ -92,4 +92,5 @@ You can typically run the project by executing the command above. But if find is
    - The application automated tests.
    - Run command:
        
-    pytest
+    make unit-tests
+    make integration-tests
