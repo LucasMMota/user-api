@@ -1,0 +1,4 @@
+flask==3.1.0
+sqlalchemy==2.0.19
+sqlalchemy-json==0.6.0
+pydantic==1.10.9
