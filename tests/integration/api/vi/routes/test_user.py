@@ -37,7 +37,7 @@ def test_create_get_update_delete_user(client):
     post_response = client.post(
         f"{settings.API_V1_PREFIX}/users",
         data=json.dumps(new_user_payload),
-        content_type="application/json"
+        content_type="application/json",
     )
     assert post_response.status_code == 201
     created_user = post_response.get_json()
@@ -57,7 +57,7 @@ def test_create_get_update_delete_user(client):
     put_response = client.put(
         f"{settings.API_V1_PREFIX}/users/{user_id}",
         data=json.dumps(updated_payload),
-        content_type="application/json"
+        content_type="application/json",
     )
     assert put_response.status_code == 200
     updated_user = put_response.get_json()
@@ -90,7 +90,7 @@ def test_update_user_invalid_input(client):
     post_response = client.post(
         f"{settings.API_V1_PREFIX}/users",
         data=json.dumps(payload),
-        content_type="application/json"
+        content_type="application/json",
     )
     assert post_response.status_code == 201
     user_id = post_response.get_json()["id"]
@@ -100,7 +100,7 @@ def test_update_user_invalid_input(client):
     put_response = client.put(
         f"{settings.API_V1_PREFIX}/users/{user_id}",
         data=json.dumps(invalid_payload),
-        content_type="application/json"
+        content_type="application/json",
     )
     assert put_response.status_code == 400
     data = put_response.get_json()

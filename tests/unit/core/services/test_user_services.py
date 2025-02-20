@@ -5,7 +5,6 @@ import pytest
 from app.core.services.user_service import UserService
 
 
-# A fake user model to simulate a UserModel with a to_dict() method.
 class FakeUserModel:
     def __init__(self, id, name, email):
         self.id = id
@@ -29,7 +28,7 @@ def user_service(mock_user_repository):
 def test_list_all_users(user_service, mock_user_repository):
     fake_users = [
         FakeUserModel(1, "Joao", "joao@gmail.com"),
-        FakeUserModel(2, "Maria", "maria@gmail.com")
+        FakeUserModel(2, "Maria", "maria@gmail.com"),
     ]
     mock_user_repository.fetch_all_users.return_value = fake_users
 
@@ -84,7 +83,9 @@ def test_create_user_duplicate_email(user_service, mock_user_repository):
 
     result = user_service.create_user("Lucas", "lucas@yahoo.com")
     assert result is None
-    user_service.user_repository.get_user_by_email.assert_called_once_with("lucas@yahoo.com")
+    user_service.user_repository.get_user_by_email.assert_called_once_with(
+        "lucas@yahoo.com"
+    )
     user_service.user_repository.assert_not_called()
 
 
@@ -131,6 +132,7 @@ def test_delete_user_not_found(user_service, mock_user_repository):
 
 def test_is_name_valid():
     from app.core.services.user_service import UserService
+
     assert UserService._is_name_valid("Maria") is True
     assert UserService._is_name_valid("Maria-Julia Santos") is True
     assert UserService._is_name_valid("A") is False
@@ -139,6 +141,7 @@ def test_is_name_valid():
 
 def test_is_email_valid():
     from app.core.services.user_service import UserService
+
     assert UserService.is_email_valid("nome@mail.com") is True
     assert UserService.is_email_valid("user_name+tag@sub.domain.com") is True
     assert UserService.is_email_valid("user1@com") is False

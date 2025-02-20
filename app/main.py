@@ -25,8 +25,8 @@ def handle_exception(error):
     logger.error(
         f"m=handle_exception, Unhandled exception at path {request.path}: {error}"
     )
-    response = jsonify({
-        "detail": "Internal server error =/ Please contact the support team."
-    })
+    response = jsonify(
+        {"detail": "Internal server error =/ Please contact the support team."}
+    )
     response.status_code = 500
     return response

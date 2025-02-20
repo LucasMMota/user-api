@@ -1,3 +1,0 @@
-[1m./test.py[m[36m:[m7[36m:[m1[36m:[m [1m[31mD101[m Missing docstring in public class
-[1m./test.py[m[36m:[m8[36m:[m1[36m:[m [1m[31mD102[m Missing docstring in public method
-[1m./test.py[m[36m:[m11[36m:[m1[36m:[m [1m[31mD102[m Missing docstring in public method

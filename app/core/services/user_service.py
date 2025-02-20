@@ -29,7 +29,9 @@ class UserService:
         if not (
             self._is_name_valid(name) and self.is_email_valid(email)
         ) or self.user_repository.get_user_by_email(email):
-            logger.error(f"m=create_user, Invalid user data: name={name}, email={email}")
+            logger.error(
+                f"m=create_user, Invalid user data: name={name}, email={email}"
+            )
             return None
 
         user_model = self.user_repository.create_user(
@@ -44,7 +46,9 @@ class UserService:
     def update_user(self, user_id, name, email) -> dict | None:
         """Updates a user by its id if exists."""
         if not self._is_name_valid(name) and self.is_email_valid(email):
-            logger.error(f"m=update_uder, Invalid user data: name={name}, email={email}")
+            logger.error(
+                f"m=update_uder, Invalid user data: name={name}, email={email}"
+            )
             return None
 
         user_model = self.user_repository.update_user(

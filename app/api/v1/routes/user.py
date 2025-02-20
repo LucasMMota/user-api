@@ -57,7 +57,9 @@ def update_user(user_id: int):
 
     updated_user = UserService().update_user(user_id, name, email)
     if not updated_user:
-        logger.error(f"m=update_user, Error updating user {user_id}, verify input, name={name}, email={email}")
+        logger.error(
+            f"m=update_user, Error updating user {user_id}, verify input, name={name}, email={email}"
+        )
         return jsonify({"error": "User not found"}), 404
 
     logger.info(f"m=update_user, User updated: {updated_user.get('id')}")
