@@ -39,7 +39,7 @@ user-api/
 ├── logger.py                        # Sets up standardized logging for the application
 ├── user_api_db.db                   # SQLite database file for local development/testing
 ├── README.md                        # This README documentation file
-└──  Makefile                         # Contains automation tasks (e.g., build enviroment, run tests, instal requirements)
+└──  Makefile                         # Contains automation tasks (e.g., build enviroment, run tests, instal requirements-all)
 ````
 
 ## 1. Setup enviroment
@@ -70,7 +70,7 @@ then you will have never to bother again activating the correct venv.
       `make enviroment`
 
    c) Install dependencies:
-      `make dependencies`
+      `make requirements-all`
 
 --------------------------------------------------------------------------------
 

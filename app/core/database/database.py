@@ -21,7 +21,7 @@ class Database:
         return create_engine(Database.DATABASE_URL.format(db_path=settings.DB_PATH))
 
     @classmethod
-    def recreate_db(cls):
+    def reinitializate_db(cls):
         """Drops all tables and then recreates them."""
         engine = cls.engine()
         BaseModel.metadata.drop_all(bind=engine)

@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     LOG_LEVEL = "INFO"
 
     API_PREFIX: str = "/api"
-    API_V1_PREFIX: str = "/v1"
+    API_V1_PREFIX: str = f"{API_PREFIX}/v1"
 
     DB_PATH: str = "user_api_db.db"
 

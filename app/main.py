@@ -12,7 +12,7 @@ Database.initialize_db()
 
 logger.info("Application starting...")
 app = Flask(__name__)
-app.register_blueprint(user_routes, url_prefix=settings.API_PREFIX)
+app.register_blueprint(user_routes, url_prefix=settings.API_V1_PREFIX)
 
 
 @app.errorhandler(Exception)

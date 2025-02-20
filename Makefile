@@ -16,15 +16,51 @@ delete-environment:
 	@pyenv virtualenv-delete user-api
 	@rm .python-version
 
-.PHONY: requirements
-## install development requirements
-requirements:
-	@PYTHONPATH=. python -m pip install -U -r requirements.txt
+
+.PHONY: requirements-test
+## install test requirements
+requirements-test:
+	@PYTHONPATH=. python -m pip install -r requirements.test.txt
 
 .PHONY: requirements-lint
 ## install lint requirements
 requirements-lint:
 	@PYTHONPATH=. python -m pip install -r requirements.lint.txt
+
+.PHONY: requirements-app
+## install prod requirements
+requirements-minimum:
+	@PYTHONPATH=. python -m pip install -U -r requirements.txt
+
+.PHONY: requirements-all
+## install all requirements
+requirements-all: requirements-test requirements-lint requirements-dev requirements-app
+
+# Test ========================================================================
+
+.PHONY: tests
+## run all unit and integration tests with coverage report
+tests:
+	@python -m pytest -W ignore::DeprecationWarning --cov-report=xml --cov-config=.coveragerc --cov-report term --cov-report html:all-tests-cov --cov=app --cov-fail-under=75 tests
+
+.PHONY: unit-tests
+## run unit tests with coverage report
+unit-tests:
+	@echo ""
+	@echo "Unit Tests"
+	@echo "=========="
+	@echo ""
+	@python -m pytest -W ignore::DeprecationWarning --cov-config=.coveragerc --cov-report term --cov-report html:unit-tests-cov --cov=app --cov-fail-under=90 tests/unit
+
+.PHONY: integration-tests
+## run integration tests with coverage report
+integration-tests:
+	@echo ""
+	@echo "Integration Tests"
+	@echo "================="
+	@echo ""
+	@python -m pytest -W ignore::DeprecationWarning --cov-config=.coveragerc --cov-report term --cov-report html:integration-tests-cov --cov=app --cov-fail-under=60 tests/integration
+
 
 # Style & Lint ================================================================
 
